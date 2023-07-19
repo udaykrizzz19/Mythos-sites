@@ -4,20 +4,11 @@ let startX = 0
 let active = 0
 let isDown = false
 
-/*--------------------
-Contants
---------------------*/
 const speedWheel = 0.02
 const speedDrag = -0.1
 
-/*--------------------
-Get Z
---------------------*/
 const getZindex = (array, index) => (array.map((_, i) => (index === i) ? array.length : array.length - Math.abs(index - i)))
 
-/*--------------------
-Items
---------------------*/
 const $items = document.querySelectorAll('.carousel-item')
 const $cursors = document.querySelectorAll('.cursor')
 
@@ -27,9 +18,6 @@ const displayItems = (item, index, active) => {
   item.style.setProperty('--active', (index-active)/$items.length)
 }
 
-/*--------------------
-Animate
---------------------*/
 const animate = () => {
   progress = Math.max(0, Math.min(progress, 100))
   active = Math.floor(progress/100*($items.length-1))
@@ -38,9 +26,6 @@ const animate = () => {
 }
 animate()
 
-/*--------------------
-Click on Items
---------------------*/
 $items.forEach((item, i) => {
   item.addEventListener('click', () => {
     progress = (i/$items.length) * 100 + 10
@@ -48,9 +33,6 @@ $items.forEach((item, i) => {
   })
 })
 
-/*--------------------
-Handlers
---------------------*/
 const handleWheel = e => {
   const wheelProgress = e.deltaY * speedWheel
   progress = progress + wheelProgress
@@ -80,9 +62,6 @@ const handleMouseUp = () => {
   isDown = false
 }
 
-/*--------------------
-Listeners
---------------------*/
 document.addEventListener('mousewheel', handleWheel)
 document.addEventListener('mousedown', handleMouseDown)
 document.addEventListener('mousemove', handleMouseMove)
